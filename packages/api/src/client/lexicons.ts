@@ -5240,6 +5240,48 @@ export const schemaDict = {
       },
     },
   },
+  AppBskyGraphGetMutedKeywords: {
+    lexicon: 1,
+    id: 'app.bsky.graph.getMutedKeywords',
+    defs: {
+      main: {
+        type: 'query',
+        description: "What keywords are the requester's account muting?",
+        parameters: {
+          type: 'params',
+          properties: {
+            limit: {
+              type: 'integer',
+              minimum: 1,
+              maximum: 100,
+              default: 50,
+            },
+            cursor: {
+              type: 'string',
+            },
+          },
+        },
+        output: {
+          encoding: 'application/json',
+          schema: {
+            type: 'object',
+            required: ['keywords'],
+            properties: {
+              cursor: {
+                type: 'string',
+              },
+              keywords: {
+                type: 'array',
+                items: {
+                  type: 'string',
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
   AppBskyGraphGetMutes: {
     lexicon: 1,
     id: 'app.bsky.graph.getMutes',
@@ -5398,6 +5440,28 @@ export const schemaDict = {
               list: {
                 type: 'string',
                 format: 'at-uri',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+  AppBskyGraphMuteKeyword: {
+    lexicon: 1,
+    id: 'app.bsky.graph.muteKeyword',
+    defs: {
+      main: {
+        type: 'procedure',
+        description: 'Mute a keyword',
+        input: {
+          encoding: 'application/json',
+          schema: {
+            type: 'object',
+            required: ['keyword'],
+            properties: {
+              keyword: {
+                type: 'string',
               },
             },
           },
@@ -5826,11 +5890,13 @@ export const ids = {
   AppBskyGraphGetList: 'app.bsky.graph.getList',
   AppBskyGraphGetListMutes: 'app.bsky.graph.getListMutes',
   AppBskyGraphGetLists: 'app.bsky.graph.getLists',
+  AppBskyGraphGetMutedKeywords: 'app.bsky.graph.getMutedKeywords',
   AppBskyGraphGetMutes: 'app.bsky.graph.getMutes',
   AppBskyGraphList: 'app.bsky.graph.list',
   AppBskyGraphListitem: 'app.bsky.graph.listitem',
   AppBskyGraphMuteActor: 'app.bsky.graph.muteActor',
   AppBskyGraphMuteActorList: 'app.bsky.graph.muteActorList',
+  AppBskyGraphMuteKeyword: 'app.bsky.graph.muteKeyword',
   AppBskyGraphUnmuteActor: 'app.bsky.graph.unmuteActor',
   AppBskyGraphUnmuteActorList: 'app.bsky.graph.unmuteActorList',
   AppBskyNotificationGetUnreadCount: 'app.bsky.notification.getUnreadCount',

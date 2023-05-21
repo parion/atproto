@@ -1,0 +1,20 @@
+{
+  "lexicon": 1,
+  "id": "app.bsky.graph.muteKeyword",
+  "defs": {
+    "main": {
+      "type": "procedure",
+      "description": "Mute a keyword",
+      "input": {
+        "encoding": "application/json",
+        "schema": {
+          "type": "object",
+          "required": ["keyword"],
+          "properties": {
+            "keyword": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

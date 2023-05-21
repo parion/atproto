@@ -2,6 +2,7 @@ import { TestServerParams } from './types'
 import { TestPlc } from './plc'
 import { TestPds } from './pds'
 import { mockNetworkUtilities } from './util'
+import * as dotenv from 'dotenv'
 
 export class TestNetworkNoAppView {
   constructor(public plc: TestPlc, public pds: TestPds) {}
@@ -9,6 +10,7 @@ export class TestNetworkNoAppView {
   static async create(
     params: Partial<TestServerParams> = {},
   ): Promise<TestNetworkNoAppView> {
+    dotenv.config()
     const dbPostgresUrl = params.dbPostgresUrl || process.env.DB_POSTGRES_URL
     const dbPostgresSchema =
       params.dbPostgresSchema || process.env.DB_POSTGRES_SCHEMA

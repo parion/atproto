@@ -98,6 +98,32 @@ export class GraphService {
     }
   }
 
+  async muteKeyword(info: {
+    keyword: string
+    mutedByDid: string
+    createdAt?: Date
+  }) {
+    const { keyword, mutedByDid, createdAt = new Date() } = info
+    await this.db.db
+      .insertInto('keyword_mute')
+      .values({
+        keyword,
+        mutedByDid,
+        createdAt: createdAt.toISOString(),
+      })
+      .onConflict((oc) => oc.doNothing())
+      .execute()
+  }
+
+  async unmuteKeyword(info: { keyword: string; mutedByDid: string }) {
+    const { keyword, mutedByDid } = info
+    await this.db.db
+      .deleteFrom('keyword_mute')
+      .where('keyword', '=', keyword)
+      .where('mutedByDid', '=', mutedByDid)
+      .execute()
+  }
+
   formatListView(list: ListInfo, profiles: Record<string, ProfileView>) {
     return {
       uri: list.uri,

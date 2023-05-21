@@ -86,9 +86,11 @@ import * as AppBskyGraphGetFollows from './types/app/bsky/graph/getFollows'
 import * as AppBskyGraphGetList from './types/app/bsky/graph/getList'
 import * as AppBskyGraphGetListMutes from './types/app/bsky/graph/getListMutes'
 import * as AppBskyGraphGetLists from './types/app/bsky/graph/getLists'
+import * as AppBskyGraphGetMutedKeywords from './types/app/bsky/graph/getMutedKeywords'
 import * as AppBskyGraphGetMutes from './types/app/bsky/graph/getMutes'
 import * as AppBskyGraphMuteActor from './types/app/bsky/graph/muteActor'
 import * as AppBskyGraphMuteActorList from './types/app/bsky/graph/muteActorList'
+import * as AppBskyGraphMuteKeyword from './types/app/bsky/graph/muteKeyword'
 import * as AppBskyGraphUnmuteActor from './types/app/bsky/graph/unmuteActor'
 import * as AppBskyGraphUnmuteActorList from './types/app/bsky/graph/unmuteActorList'
 import * as AppBskyNotificationGetUnreadCount from './types/app/bsky/notification/getUnreadCount'
@@ -886,6 +888,13 @@ export class GraphNS {
     return this._server.xrpc.method(nsid, cfg)
   }
 
+  getMutedKeywords<AV extends AuthVerifier>(
+    cfg: ConfigOf<AV, AppBskyGraphGetMutedKeywords.Handler<ExtractAuth<AV>>>,
+  ) {
+    const nsid = 'app.bsky.graph.getMutedKeywords' // @ts-ignore
+    return this._server.xrpc.method(nsid, cfg)
+  }
+
   getMutes<AV extends AuthVerifier>(
     cfg: ConfigOf<AV, AppBskyGraphGetMutes.Handler<ExtractAuth<AV>>>,
   ) {
@@ -904,6 +913,13 @@ export class GraphNS {
     cfg: ConfigOf<AV, AppBskyGraphMuteActorList.Handler<ExtractAuth<AV>>>,
   ) {
     const nsid = 'app.bsky.graph.muteActorList' // @ts-ignore
+    return this._server.xrpc.method(nsid, cfg)
+  }
+
+  muteKeyword<AV extends AuthVerifier>(
+    cfg: ConfigOf<AV, AppBskyGraphMuteKeyword.Handler<ExtractAuth<AV>>>,
+  ) {
+    const nsid = 'app.bsky.graph.muteKeyword' // @ts-ignore
     return this._server.xrpc.method(nsid, cfg)
   }
 
